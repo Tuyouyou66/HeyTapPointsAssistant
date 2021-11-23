@@ -1,0 +1,16 @@
+{
+  "assets": [],
+  "build": {
+    "build_id": "D7E636EE-23",
+    "build_number": 23,
+    "build_time": 1637695664932
+  },
+  "useFeatures": [],
+  "icon": "res/logo.png",
+  "main": "main.js",
+  "name": "欢太积分签到助手",
+  "packageName": "com.freysu.realmepoints",
+  "scripts": {},
+  "versionCode": 11,
+  "versionName": "1.1.0"
+}
