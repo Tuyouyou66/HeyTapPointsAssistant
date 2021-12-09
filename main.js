@@ -28,6 +28,9 @@ var cj每日积分翻倍 = "./modules/[抽奖]每日积分翻倍.js";
 var cj天天积分翻倍 = "./modules/[抽奖]天天积分翻倍.js";
 var cj赚积分购好物 = "./modules/[抽奖]赚积分购好物.js";
 
+var tklistRun = "./modules/tklistRun.js";
+var cjlistRun = "./modules/cjlistRun.js";
+
 ui.layout(
     <drawer id="drawer">
     <vertical>
@@ -65,11 +68,11 @@ ui.layout(
                         <checkbox textSize="16sp" id="tk4" text="一加加油站" />
                         <checkbox textSize="16sp" id="tk5" text="现金助力" />
                         <checkbox textSize="16sp" id="tk6" text="现金任务" />
-                        <checkbox textSize="16sp" id="tk7" text="全家桶签到" />
-                        <checkbox textSize="16sp" id="tk8" text="签到页面" />
-                        <checkbox textSize="16sp" id="tk9" text="零元赚积分" />
-                        <checkbox textSize="16sp" id="tk10" text="Reno7 流星宝藏" />
-                        <checkbox textSize="16sp" id="tk11" text="realme积分乱斗" />
+                        <checkbox textSize="16sp" id="tk7" text="零元赚积分" />
+                        <checkbox textSize="16sp" id="tk8" text="realme积分乱斗" />
+                        <checkbox textSize="16sp" id="tk9" text="Reno7 流星宝藏" />
+                        <checkbox textSize="16sp" id="tk10" text="签到页面" />
+                        <checkbox textSize="16sp" id="tk11" text="全家桶签到" />
                         <horizontal gravity="center">
                             <button id="allSelect" text="全选" />
                             <button id="clallSelect" text="取消全选" />
@@ -264,23 +267,26 @@ ui.emitter.on("resume", function () {
 
 ui.start.on("click", function () {
     //程序开始运行之前判断无障碍服务
-    if (auto.service == null) {
-        toast("请先开启无障碍服务！");
-        return;
-    }
+    // if (auto.service == null) {
+    //     toast("请先开启无障碍服务！");
+    //     return;
+    // }
     main();
 });
 
 //创建选项菜单(右上角)
 ui.emitter.on("create_options_menu", menu => {
+    menu.add("停止");
     menu.add("退出");
 });
-
 //监听选项菜单点击
 ui.emitter.on("options_item_selected", (e, item) => {
     switch (item.getTitle()) {
         case "退出":
             ui.finish();
+            break;
+        case "停止":
+            engines.stopAllAndToast();
             break;
     }
     e.consumed = true;
@@ -372,9 +378,9 @@ ui.menu.on("item_click", item => {
                             break;
                         case 1:
                             //toast("选了" + accSetting[i]);
+                            log("提示：可以点击【清除日志】清除该区域的内容")
                             log("当前的UA是\n" + UA);
                             log("当前COOKIE是\n" + COOKIE);
-                            log("提示：可以点击【清除日志】清除该区域的内容")
                             break;
                         default:
                             //toast("未做选择");
@@ -630,11 +636,12 @@ function main() {
         });
         //执行
         ui.Run.on("click", function () {
-            selectRun();
             console.log("点击了执行");
+            selectRun();
         });
         //全选
         ui.allSelect.on("click", function () {
+            console.log("点击了全选");
             // log(ui.allSelect.getText())
             ui.tk1.checked = true;
             ui.tk2.checked = true;
@@ -647,11 +654,11 @@ function main() {
             ui.tk9.checked = true;
             ui.tk10.checked = true;
             ui.tk11.checked = true;
-            console.log("点击了全选");
             toast("不建议全选执行，建议按需执行")
         })
         //取消全选
         ui.clallSelect.on("click", function () {
+            console.log("点击了取消全选");
             ui.tk1.checked = false;
             ui.tk2.checked = false;
             ui.tk3.checked = false;
@@ -663,15 +670,15 @@ function main() {
             ui.tk9.checked = false;
             ui.tk10.checked = false;
             ui.tk11.checked = false;
-            console.log("点击了取消全选");
         })
         //执行
         ui.Run1.on("click", function () {
-            selectRun1();
             console.log("点击了执行");
+            selectRun1();
         })
         //全选
         ui.allSelect1.on("click", function () {
+            console.log("点击了全选");
             ui.cj1.checked = true;
             ui.cj2.checked = true;
             ui.cj3.checked = true;
@@ -681,11 +688,11 @@ function main() {
             ui.cj7.checked = true;
             ui.cj8.checked = true;
             ui.cj9.checked = true;
-            console.log("点击了全选");
             toast("不建议全选执行，建议按需执行")
         })
         //取消全选
         ui.clallSelect1.on("click", function () {
+            console.log("点击了取消全选");
             ui.cj1.checked = false;
             ui.cj2.checked = false;
             ui.cj3.checked = false;
@@ -695,7 +702,6 @@ function main() {
             ui.cj7.checked = false;
             ui.cj8.checked = false;
             ui.cj9.checked = false;
-            console.log("点击了取消全选");
         })
     })
 }
@@ -988,191 +994,205 @@ function noticeFinish() {
     });
 }
 
-// 任务选择
-function selectRun() {
-    if (ui.tk1.isChecked()) {
-        console.log("选了" + ui.tk1.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tk社区视频);
-        noticeFinish();
-        // });
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk2.isChecked()) {
-        console.log("选了" + ui.tk2.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tk赚积分购好物);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk3.isChecked()) {
-        console.log("选了" + ui.tk3.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tkReno7);
-        noticeFinish();
-        //});
-
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk4.isChecked()) {
-        console.log("选了" + ui.tk4.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tk一加加油站);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk5.isChecked()) {
-        console.log("选了" + ui.tk5.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tk现金助力);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk6.isChecked()) {
-        console.log("选了" + ui.tk6.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tk现金任务);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk7.isChecked()) {
-        console.log("选了" + ui.tk7.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tk零元赚积分);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk8.isChecked()) {
-        console.log("选了" + ui.tk8.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tkrealme积分乱斗);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk9.isChecked()) {
-        console.log("选了" + ui.tk9.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tkReno7流星宝藏);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk10.isChecked()) {
-        console.log("选了" + ui.tk10.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tk签到页面);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-    if (ui.tk11.isChecked()) {
-        console.log("选了" + ui.tk11.getText());
-        //threads.start(function () {
-        engines.execScriptFile(tk全家桶签到);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了@");
-    }
-}
-
 // 抽奖选择
 function selectRun1() {
-    if (ui.cj1.isChecked()) {
-        console.log("选了" + ui.cj1.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cjrealme宠粉计划);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了1");
-    }
-    if (ui.cj2.isChecked()) {
-        console.log("选了" + ui.cj2.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cjrealme积分乱斗);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了2");
-    }
-    if (ui.cj3.isChecked()) {
-        console.log("选了" + ui.cj3.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cjReno7);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了3");
-    }
-    if (ui.cj4.isChecked()) {
-        console.log("选了" + ui.cj4.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cjReno7流星宝藏);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了4");
-    }
-    if (ui.cj5.isChecked()) {
-        console.log("选了" + ui.cj5.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cj欢太宠粉计划);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了5");
-    }
-    if (ui.cj6.isChecked()) {
-        console.log("选了" + ui.cj6.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cj零元赚积分);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了6");
-    }
-    if (ui.cj7.isChecked()) {
-        console.log("选了" + ui.cj7.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cj每日积分翻倍);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了7");
-    }
-    if (ui.cj8.isChecked()) {
-        console.log("选了" + ui.cj8.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cj天天积分翻倍);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了8");
-    }
-    if (ui.cj9.isChecked()) {
-        console.log("选了" + ui.cj9.getText());
-        //threads.start(function () {
-        engines.execScriptFile(cj赚积分购好物);
-        noticeFinish();
-        //});
-    } else {
-        // console.log("取消选了9");
-    }
+    // if (ui.cj1.isChecked() && ui.cj2.isChecked() && ui.cj3.isChecked() && ui.cj4.isChecked() && ui.cj5.isChecked() && ui.cj6.isChecked() && ui.cj7.isChecked() && ui.cj8.isChecked() && ui.cj9.isChecked()) {
+    //     engines.execScriptFile(cjlistRun);
+    // } else {
+        threads.start(function () {
+            var enginesId;
+            if (ui.cj1.isChecked()) {
+                console.log("选了" + ui.cj1.getText());
+                enginesId = engines.execScriptFile(cjrealme宠粉计划);
+                toastLog("执行完 realme宠粉计划")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.cj2.isChecked()) {
+                console.log("选了" + ui.cj2.getText());
+                enginesId = engines.execScriptFile(cjrealme积分乱斗);
+                toastLog("执行完 realme积分乱斗")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.cj3.isChecked()) {
+                console.log("选了" + ui.cj3.getText());
+                enginesId = engines.execScriptFile(cjReno7);
+                toastLog("执行完 Reno7")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.cj4.isChecked()) {
+                console.log("选了" + ui.cj4.getText());
+                enginesId = engines.execScriptFile(cjReno7流星宝藏);
+                toastLog("执行完 Reno7流星宝藏")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.cj5.isChecked()) {
+                console.log("选了" + ui.cj5.getText());
+                enginesId = engines.execScriptFile(cj欢太宠粉计划);
+                toastLog("执行完 欢太宠粉计划")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.cj6.isChecked()) {
+                console.log("选了" + ui.cj6.getText());
+                enginesId = engines.execScriptFile(cj零元赚积分);
+                toastLog("执行完 零元赚积分")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.cj7.isChecked()) {
+                console.log("选了" + ui.cj7.getText());
+                enginesId = engines.execScriptFile(cj每日积分翻倍);
+                toastLog("执行完 每日积分翻倍")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.cj8.isChecked()) {
+                console.log("选了" + ui.cj8.getText());
+                enginesId = engines.execScriptFile(cj天天积分翻倍);
+                toastLog("执行完 天天积分翻倍")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.cj9.isChecked()) {
+                console.log("选了" + ui.cj9.getText());
+                enginesId = engines.execScriptFile(cj赚积分购好物);
+                toastLog("执行完 赚积分购好物")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+        })
+    // }
+}
+// 任务选择
+function selectRun() {
+    // if (ui.tk1.isChecked() && ui.tk2.isChecked() && ui.tk3.isChecked() && ui.tk4.isChecked() && ui.tk5.isChecked() && ui.tk6.isChecked() && ui.tk7.isChecked() && ui.tk8.isChecked() && ui.tk9.isChecked() && ui.tk10.isChecked() && ui.tk11.isChecked()) {
+    //     engines.execScriptFile(tklistRun);
+    // } else {
+        threads.start(function () {
+            var enginesId;
+            if (ui.tk1.isChecked()) {
+                console.log("选了" + ui.tk1.getText());
+                enginesId = engines.execScriptFile(tk社区视频);
+                toastLog("执行完 社区视频")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk2.isChecked()) {
+                console.log("选了" + ui.tk2.getText());
+                enginesId = engines.execScriptFile(tk赚积分购好物);
+                toastLog("执行完 赚积分购好物")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk3.isChecked()) {
+                console.log("选了" + ui.tk3.getText());
+                enginesId = engines.execScriptFile(tkReno7);
+                toastLog("执行完 Reno7")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk4.isChecked()) {
+                console.log("选了" + ui.tk4.getText());
+                enginesId = engines.execScriptFile(tk一加加油站);
+                toastLog("执行完 一加加油站")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk5.isChecked()) {
+                console.log("选了" + ui.tk5.getText());
+                enginesId = engines.execScriptFile(tk现金助力);
+                toastLog("执行完 现金助力")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk6.isChecked()) {
+                console.log("选了" + ui.tk6.getText());
+                enginesId = engines.execScriptFile(tk现金任务);
+                toastLog("执行完 现金任务")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk7.isChecked()) {
+                console.log("选了" + ui.tk7.getText());
+                enginesId = engines.execScriptFile(tk零元赚积分);
+                toastLog("执行完 零元赚积分")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk8.isChecked()) {
+                console.log("选了" + ui.tk8.getText());
+                enginesId = engines.execScriptFile(tkrealme积分乱斗);
+                toastLog("执行完 realme积分乱斗")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk9.isChecked()) {
+                console.log("选了" + ui.tk9.getText());
+                enginesId = engines.execScriptFile(tkReno7流星宝藏);
+                toastLog("执行完 Reno7流星宝藏")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk10.isChecked()) {
+                console.log("选了" + ui.tk10.getText());
+                enginesId = engines.execScriptFile(tk签到页面);
+                toastLog("执行完 签到页面")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            if (ui.tk11.isChecked()) {
+                console.log("选了" + ui.tk11.getText());
+                enginesId = engines.execScriptFile(tk全家桶签到);
+                toastLog("执行完 全家桶签到")
+                sleep(500);
+                while (!enginesId.getEngine().isDestroyed()) {
+                    sleep(1000);
+                }
+            }
+            console.show();
+            toastLog("结束");
+        })
+    // }
 }

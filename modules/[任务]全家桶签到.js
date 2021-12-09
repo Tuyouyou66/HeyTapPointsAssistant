@@ -1,13 +1,9 @@
 //var storage = storages.create("OPPO商城小铺");
 
 //if(storage.get("[任务]全家桶签到") == "true"){
-auto.waitFor();
+//auto.waitFor();
 开始();
 //}
-
-
-
-
 
 //1.游戏中心  2.视频  3.钱包 4.我的oppo 5.健康 6.智能家居 7.软件商店  8.主题商店  9.浏览器   10.我的一加
 function checkIn(PKG, CODE, appName) {
@@ -46,7 +42,6 @@ function checkIn(PKG, CODE, appName) {
     sleep(1000)
 }
 
-
 function check(PKG, CODE, appName) {
     toastLog(appName + "签到中");
     try {
@@ -82,13 +77,6 @@ function check(PKG, CODE, appName) {
     sleep(1000)
 }
 
-
-
-
-
-
-
-
 function 开始() {
     log("--------任务开始--------");
     var name = getAppName("com.oppo.usercenter");
@@ -123,7 +111,6 @@ function 开始() {
 
 
     }
-
 
     var name = getAppName("com.heytap.usercenter");
     if ((name) != null) {
@@ -189,9 +176,6 @@ function 开始() {
         }
     }
 
-
-
-
     var name = getAppName("com.oppo.community");
     if ((name) != null) {
         launch("com.oppo.community");
@@ -209,8 +193,6 @@ function 开始() {
             shell("am force-stop com.oppo.community", true);
         }
     }
-
-
 
     var name = getAppName("com.heytap.music");
     if ((name) != null) {
@@ -230,8 +212,6 @@ function 开始() {
         }
     }
 
-
-
     var name = getAppName("com.heytap.browser");
     if ((name) != null) {
         launch("com.heytap.browser");
@@ -250,7 +230,6 @@ function 开始() {
         }
     }
 
-
     var name = getAppName("com.coloros.videoeditor");
     if ((name) != null) {
         launch("com.coloros.videoeditor");
@@ -267,7 +246,6 @@ function 开始() {
             shell("am force-stop com.coloros.videoeditor", true);
         }
     }
-
 
     var name = getAppName("com.heytap.speechassist");
     if ((name) != null) {
@@ -304,7 +282,6 @@ function 开始() {
     log("--------任务完成--------");
     log("返回欢太积分助手");
     app.launchPackage("com.freysu.heytappoints");
-    events.broadcast.emit("exit", "[任务]全家桶签到");
 
 }
 

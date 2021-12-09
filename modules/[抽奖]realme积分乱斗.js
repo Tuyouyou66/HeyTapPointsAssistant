@@ -28,8 +28,6 @@ function 开始() {
     log("--------任务完成--------");
     log("返回欢太积分助手");
     app.launchPackage("com.freysu.heytappoints");
-    events.broadcast.emit("exit", "[任务]realme积分乱斗");
-
 }
 
 //感谢支持

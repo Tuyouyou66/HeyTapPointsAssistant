@@ -5,13 +5,13 @@ var UA = storage1.get("UA");
 // var COOKIE1="";
 
 
-if (COOKIE1.indexOf('Op_lpvt_f18367c55fd7569d9000cd9986846577=') != -1 && COOKIE.indexOf('Op_lvt_f18367c55fd7569d9000cd9986846577=') != -1) {
-    var time1 = COOKIE1.split("Op_lpvt_f18367c55fd7569d9000cd9986846577=")[1].split(';')[0];
-    var time2 = COOKIE1.split("Op_lvt_f18367c55fd7569d9000cd9986846577=")[1].split(';')[0];
-    var COOKIE = COOKIE1.replace(time1, Math.round(new Date().getTime() / 1000)).replace(time2, Math.round(new Date().getTime() / 1000 - 10000) + ',' + Math.round(new Date().getTime() / 1000));
-} else {
-    var COOKIE = COOKIE1;
-}
+// if (COOKIE1.indexOf('Op_lpvt_f18367c55fd7569d9000cd9986846577=') != -1 && COOKIE.indexOf('Op_lvt_f18367c55fd7569d9000cd9986846577=') != -1) {
+//     var time1 = COOKIE1.split("Op_lpvt_f18367c55fd7569d9000cd9986846577=")[1].split(';')[0];
+//     var time2 = COOKIE1.split("Op_lvt_f18367c55fd7569d9000cd9986846577=")[1].split(';')[0];
+//     var COOKIE = COOKIE1.replace(time1, Math.round(new Date().getTime() / 1000)).replace(time2, Math.round(new Date().getTime() / 1000 - 10000) + ',' + Math.round(new Date().getTime() / 1000));
+// } else {
+//     var COOKIE = COOKIE1;
+// }
 
 
 
@@ -53,7 +53,6 @@ function 开始() {
     log("--------任务完成--------");
     log("返回欢太积分助手");
     app.launchPackage("com.freysu.heytappoints");
-    events.broadcast.emit("exit", "[任务]Reno7 流星宝藏");
 
 }
 
