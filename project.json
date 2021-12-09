@@ -1,15 +1,15 @@
 {
   "assets": [],
   "build": {
-    "build_id": "D7E636EE-23",
-    "build_number": 23,
-    "build_time": 1637695664932
+    "build_id": "0C45F9C5-3",
+    "build_number": 3,
+    "build_time": 1639037611852
   },
   "useFeatures": [],
   "icon": "res/logo.png",
   "main": "main.js",
-  "name": "欢太积分签到助手",
-  "packageName": "com.freysu.realmepoints",
+  "name": "HeyTapPointsAssistant",
+  "packageName": "com.freysu.heytappoints",
   "scripts": {},
   "versionCode": 11,
   "versionName": "1.1.0"
