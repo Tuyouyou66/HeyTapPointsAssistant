@@ -32,7 +32,7 @@ function 开始() {
     lottery("1616", "1503", "欢太宠粉计划", "", "");
     log("--------任务完成--------");
     log("返回欢太积分助手");
-    app.launchPackage("com.freysu.realmepoints");
+    app.launchPackage("com.freysu.heytappoints");
     events.broadcast.emit("exit", "[抽奖]realme宠粉计划");
 
 

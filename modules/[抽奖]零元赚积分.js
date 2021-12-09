@@ -26,7 +26,7 @@ function 开始() {
     lottery("1618", "1495", "0元赚积分", "", "");
     log("--------任务完成--------");
     log("返回欢太积分助手");
-    app.launchPackage("com.freysu.realmepoints");
+    app.launchPackage("com.freysu.heytappoints");
     events.broadcast.emit("exit", "[抽奖]零元赚积分");
 
 

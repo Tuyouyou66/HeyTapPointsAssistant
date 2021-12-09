@@ -298,7 +298,7 @@ function HeyTaptask() {
 
     log("--------任务完成--------");
     log("返回欢太积分助手");
-    app.launchPackage("com.freysu.realmepoints");
+    app.launchPackage("com.freysu.heytappoints");
     events.broadcast.emit("exit", "[任务]签到页面");
 
 }

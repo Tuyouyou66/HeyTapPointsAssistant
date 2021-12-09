@@ -1,9 +1,9 @@
 {
   "assets": [],
   "build": {
-    "build_id": "0C45F9C5-3",
-    "build_number": 3,
-    "build_time": 1639037611852
+    "build_id": "BEFC87F2-10",
+    "build_number": 10,
+    "build_time": 1639051169506
   },
   "useFeatures": [],
   "icon": "res/logo.png",
@@ -11,6 +11,6 @@
   "name": "HeyTapPointsAssistant",
   "packageName": "com.freysu.heytappoints",
   "scripts": {},
-  "versionCode": 11,
-  "versionName": "1.1.0"
+  "versionCode": 17,
+  "versionName": "1.1.6"
 }

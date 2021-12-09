@@ -28,7 +28,7 @@ function 开始() {
     lottery("1418", "1307", "赚积分购好物", "", "");
     log("--------任务完成--------");
     log("返回欢太积分助手");
-    app.launchPackage("com.freysu.realmepoints");
+    app.launchPackage("com.freysu.heytappoints");
     events.broadcast.emit("exit", "[抽奖]赚积分购好物");
 
 

@@ -28,7 +28,7 @@ function 开始() {
     lottery("1832", "1608", "Reno7", "22168", "21165");
     log("--------任务完成--------");
     log("返回欢太积分助手");
-    app.launchPackage("com.freysu.realmepoints");
+    app.launchPackage("com.freysu.heytappoints");
     events.broadcast.emit("exit", "[任务]Reno7");
 
 

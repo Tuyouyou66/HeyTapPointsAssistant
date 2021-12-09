@@ -170,7 +170,7 @@ function showHelp() {
                             <frame height="match_parent" gravity="center">
                                 <vertical>
                                     <text text="1. 需要自己去抓OPPO商城的领券页面的UA和COOKIE。抓取方法请自行百度。" textSize="16sp" />
-                                    <text text="2. 在本APP【右上角按钮】的【设置】的【配置账号】中填写。" textSize="16sp" />
+                                    <text text="2. 在本APP【侧滑栏】的【账号】的【配置账号】中填写。" textSize="16sp" />
                                     <text text="" />
                                 </vertical>
                             </frame>
@@ -240,6 +240,8 @@ function showHelp() {
     ui.tabs1.setupWithViewPager(ui.viewpager1);
 
     activity.setSupportActionBar(ui.toolbar1);
+    
+    toastLog("切换到多任务管理界面再切回来可以退出此界面")
 }
 
 ui.autoService.on("check", function (checked) {
@@ -293,16 +295,20 @@ ui.tabs.setupWithViewPager(ui.viewpager);
 //让工具栏左上角可以打开侧拉菜单
 ui.toolbar.setupWithDrawer(ui.drawer);
 ui.menu.setDataSource([{
-        title: "设置",
-        icon: "@drawable/ic_android_black_48dp"
+        title: "免责声明",
+        icon: "@drawable/ic_favorite_black_48dp"
+    },
+    {
+        title: "账号",
+        icon: "@drawable/ic_account_circle_black_48dp"
+    },
+    {
+        title: "帮助",
+        icon: "@drawable/ic_help_black_48dp"
     },
     {
         title: "关于",
-        icon: "@drawable/ic_settings_black_48dp"
-    },
-    {
-        title: "使用说明",
-        icon: "@drawable/ic_favorite_black_48dp"
+        icon: "@drawable/ic_info_black_48dp"
     },
     {
         title: "退出",
@@ -312,18 +318,30 @@ ui.menu.setDataSource([{
 
 ui.menu.on("item_click", item => {
     switch (item.title) {
-        case "使用说明":
+        case "免责声明":
+            dialogs.build({
+                title: "免责声明",
+                content: "    本项目中涉及的任何脚本，仅用于测试和学习研究，禁止用于商业用途，不能保证其合法性，准确性，完整性和有效性，请根据情况自行判断。\n    所有使用者在使用本项目的任何部分时，需先遵守法律法规。对于一切使用不当所造成的后果，需自行承担。对任何脚本问题概不负责，包括但不限于由任何脚本错误导致的任何损失或损害。\n    如果任何单位或个人认为该项目可能涉嫌侵犯其权利，则应及时通知并提供身份证明，所有权证明，我们将在收到认证文件后删除相关文件。\n    任何以任何方式查看此项目的人或直接或间接使用该项目的任何脚本的使用者都应仔细阅读此声明。本人保留随时更改或补充此免责声明的权利。一旦使用并复制了任何相关脚本或本项目的规则，则视为您已接受此免责声明。\n    您必须在下载后的24小时内从计算机或手机中完全删除以上内容。\n    您使用或者复制了本项目且本人制作的任何脚本，则视为已接受此声明，请仔细阅读。",
+                positive: "接受",
+                negative: "不接受"
+            }).on("positive", () => {
+                toast("你已接受此声明");
+            }).on("negative", () => {
+                ui.finish();
+            }).show();
+            break;
+        case "帮助":
             showHelp();
             break;
         case "关于":
-            alert("欢太积分助手 V1.1.0", "本app基于Auto.JS打包而成，\nAPP现阶段是在测试阶段。\n\n制作者：酷安@FreySu");
+            alert("欢太积分助手 V1.1.6", "本app基于AutoJS打包而成\n\n本APP使用到的部分脚本基于酷安@iFyn_编写的开源AutoJS脚本\n\nAPP现阶段是在测试阶段\n\n制作者：酷安@FreySu\n\n本APP的开源项目地址：\nhttps://github.com/freysu/HeyTapPointsAssistant\n\n酷安@iFyn_的开源项目地址：\nhttps://github.com/i-Fyn/oppostore");
             break;
         case "退出":
             ui.finish();
             break;
-        case "设置":
+        case "账号":
             var accSetting = ["配置账号", "查看当前账号"];
-            dialogs.select("设置", accSetting)
+            dialogs.select("账号", accSetting)
                 .then(i => {
                     switch (i) {
                         case 0:
@@ -520,7 +538,7 @@ ui.consoleClear.on("click", function () {
     console.clear();
 })
 
-toast("请先浏览【使用说明】");
+toast("请先浏览【侧滑栏】的【帮助】");
 
 function main() {
     threads.start(function () {
@@ -974,101 +992,101 @@ function noticeFinish() {
 function selectRun() {
     if (ui.tk1.isChecked()) {
         console.log("选了" + ui.tk1.getText());
-        threads.start(function () {
-            engines.execScriptFile(tk社区视频);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tk社区视频);
+        noticeFinish();
+        // });
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk2.isChecked()) {
         console.log("选了" + ui.tk2.getText());
-        threads.start(function () {
-            engines.execScriptFile(tk赚积分购好物);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tk赚积分购好物);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk3.isChecked()) {
         console.log("选了" + ui.tk3.getText());
-        threads.start(function () {
-            engines.execScriptFile(tkReno7);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tkReno7);
+        noticeFinish();
+        //});
 
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk4.isChecked()) {
         console.log("选了" + ui.tk4.getText());
-        threads.start(function () {
-            engines.execScriptFile(tk一加加油站);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tk一加加油站);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk5.isChecked()) {
         console.log("选了" + ui.tk5.getText());
-        threads.start(function () {
-            engines.execScriptFile(tk现金助力);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tk现金助力);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk6.isChecked()) {
         console.log("选了" + ui.tk6.getText());
-        threads.start(function () {
-            engines.execScriptFile(tk现金任务);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tk现金任务);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk7.isChecked()) {
         console.log("选了" + ui.tk7.getText());
-        threads.start(function () {
-            engines.execScriptFile(tk零元赚积分);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tk零元赚积分);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk8.isChecked()) {
         console.log("选了" + ui.tk8.getText());
-        threads.start(function () {
-            engines.execScriptFile(tkrealme积分乱斗);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tkrealme积分乱斗);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk9.isChecked()) {
         console.log("选了" + ui.tk9.getText());
-        threads.start(function () {
-            engines.execScriptFile(tkReno7流星宝藏);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tkReno7流星宝藏);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk10.isChecked()) {
         console.log("选了" + ui.tk10.getText());
-        threads.start(function () {
-            engines.execScriptFile(tk签到页面);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tk签到页面);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
     if (ui.tk11.isChecked()) {
         console.log("选了" + ui.tk11.getText());
-        threads.start(function () {
-            engines.execScriptFile(tk全家桶签到);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(tk全家桶签到);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了@");
     }
@@ -1078,82 +1096,82 @@ function selectRun() {
 function selectRun1() {
     if (ui.cj1.isChecked()) {
         console.log("选了" + ui.cj1.getText());
-        threads.start(function () {
-            engines.execScriptFile(cjrealme宠粉计划);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cjrealme宠粉计划);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了1");
     }
     if (ui.cj2.isChecked()) {
         console.log("选了" + ui.cj2.getText());
-        threads.start(function () {
-            engines.execScriptFile(cjrealme积分乱斗);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cjrealme积分乱斗);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了2");
     }
     if (ui.cj3.isChecked()) {
         console.log("选了" + ui.cj3.getText());
-        threads.start(function () {
-            engines.execScriptFile(cjReno7);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cjReno7);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了3");
     }
     if (ui.cj4.isChecked()) {
         console.log("选了" + ui.cj4.getText());
-        threads.start(function () {
-            engines.execScriptFile(cjReno7流星宝藏);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cjReno7流星宝藏);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了4");
     }
     if (ui.cj5.isChecked()) {
         console.log("选了" + ui.cj5.getText());
-        threads.start(function () {
-            engines.execScriptFile(cj欢太宠粉计划);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cj欢太宠粉计划);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了5");
     }
     if (ui.cj6.isChecked()) {
         console.log("选了" + ui.cj6.getText());
-        threads.start(function () {
-            engines.execScriptFile(cj零元赚积分);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cj零元赚积分);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了6");
     }
     if (ui.cj7.isChecked()) {
         console.log("选了" + ui.cj7.getText());
-        threads.start(function () {
-            engines.execScriptFile(cj每日积分翻倍);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cj每日积分翻倍);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了7");
     }
     if (ui.cj8.isChecked()) {
         console.log("选了" + ui.cj8.getText());
-        threads.start(function () {
-            engines.execScriptFile(cj天天积分翻倍);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cj天天积分翻倍);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了8");
     }
     if (ui.cj9.isChecked()) {
         console.log("选了" + ui.cj9.getText());
-        threads.start(function () {
-            engines.execScriptFile(cj赚积分购好物);
-            noticeFinish();
-        });
+        //threads.start(function () {
+        engines.execScriptFile(cj赚积分购好物);
+        noticeFinish();
+        //});
     } else {
         // console.log("取消选了9");
     }

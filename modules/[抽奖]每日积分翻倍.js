@@ -26,7 +26,7 @@ function 开始() {
     lottery("815", "460", "每日积分翻倍", "", "");
     log("--------任务完成--------");
     log("返回欢太积分助手");
-    app.launchPackage("com.freysu.realmepoints");
+    app.launchPackage("com.freysu.heytappoints");
     events.broadcast.emit("exit", "[抽奖]每日积分翻倍");
 
 

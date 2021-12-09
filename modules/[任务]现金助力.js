@@ -35,11 +35,13 @@ sleep(1500);
 
 function 开始() {
     log("--------任务开始--------");
-    var b = "";
+    var b = rawInput("请提交助力帐号的ID");
+    //var b = "";
     var c = String(b).split(';');
 
-    if (b == null) {
-        toast("请提交助力帐号的ID")
+    //if (b == null) {
+    if (b.length == 0) {
+        toastLog("请提交助力帐号的ID")
     } else {
         for (var t = 0; t < 3; t++) {
             if (c[t] != null) {
@@ -60,7 +62,7 @@ function 开始() {
     }
     log("--------任务完成--------");
     log("返回欢太积分助手");
-    app.launchPackage("com.freysu.realmepoints");
+    app.launchPackage("com.freysu.heytappoints");
     events.broadcast.emit("exit", "[任务]现金助力");
 
 }
