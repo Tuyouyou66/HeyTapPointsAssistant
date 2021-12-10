@@ -2,6 +2,7 @@
 
 //if(storage.get("[任务]全家桶签到") == "true"){
 //auto.waitFor();
+console.show();
 开始();
 //}
 
@@ -23,7 +24,7 @@ function checkIn(PKG, CODE, appName) {
 
         })
 
-        sleep(4500);
+        sleep(2000);
         var isRoot = $shell.isRootAvailable();
         if (isRoot) {
             shell("am force-stop com.oppo.usercenter", true);
@@ -58,7 +59,7 @@ function check(PKG, CODE, appName) {
 
         })
 
-        sleep(4500);
+        sleep(2000);
         var isRoot = $shell.isRootAvailable();
         if (isRoot) {
             shell("am force-stop com.heytap.usercenter", true);
