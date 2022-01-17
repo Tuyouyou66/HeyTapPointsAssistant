@@ -1,0 +1,30 @@
+{
+  "assets": [],
+  "build": {
+    "build_id": "5418346D-35",
+    "build_number": 35,
+    "build_time": 1642445951216
+  },
+  "useFeatures": [],
+  "icon": "res/logo.png",
+  "launchConfig": {
+    "hideLauncher": false,
+    "hideLogs": false,
+    "displaySplash": false,
+    "serviceDesc": "使脚本自动操作(点击、长按、滑动等)所需，若关闭则只能执行不涉及自动操作的脚本。",
+    "splashIcon": "res/splashIcon.png",
+    "splashText": "Powered by 酷安@FreySu",
+    "stableMode": false,
+    "volumeUpcontrol": true
+  },
+  "main": "main.js",
+  "name": "HeyTapPointsAssistant",
+  "packageName": "com.freysu.heytappoints",
+  "scripts": {},
+  "signingConfig": {
+    "alias": "",
+    "keystore": ""
+  },
+  "versionCode": 21,
+  "versionName": "1.2.0"
+}
